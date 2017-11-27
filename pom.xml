@@ -171,8 +171,10 @@
 	<profiles>
 		<profile>
 			<id>testes-integracao</id>
+			<activation>
+            	<activeByDefault>true</activeByDefault>
+        	</activation>
 			<dependencies>
-
 				<!-- arquillian-tomcat -->
 
 				<dependency>

@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.GenericArchive;
@@ -24,15 +22,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import junit.framework.Assert;
 
 @RunWith(Arquillian.class)
 public class FiltraNegociacoesIT {
 
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("ddMMyyyy");
-	private static final String HTTP_LOCALHOST_8888 = "http://localhost:8888";
+	private static final String HTTP_LOCALHOST_8888 = "http://10.117.176.239:8888";
 	private WebDriver driver;
+	
+	protected ChromeOptions options = new ChromeOptions();
 
 	@Deployment
 	public static WebArchive createWar() {
@@ -58,19 +61,22 @@ public class FiltraNegociacoesIT {
 
 	@Before
 	public void iniciaNavegador() {
-		if (System.getProperty("phantomjs.binary.path") != null) {
-			
-			iniciaPhantomJs();
-			
-		} else if (System.getProperty("webdriver.chrome.driver") != null) {
-			
-			iniciaChrome();
-			
-		} else {
-			
-			throw new RuntimeException("Nao eh possivel determinar o navegador para execucao dos testes.");
-			
-		}
+		
+		iniciaChrome();
+		
+//		if (System.getProperty("phantomjs.binary.path") != null) {
+//			
+//			iniciaPhantomJs();
+//			
+//		} else if (System.getProperty("webdriver.chrome.driver") != null) {
+//			
+//			iniciaChrome();
+//			
+//		} else {
+//			
+//			throw new RuntimeException("Nao eh possivel determinar o navegador para execucao dos testes.");
+//			
+//		}
 	}
 
 	@After
@@ -127,8 +133,14 @@ public class FiltraNegociacoesIT {
 		return data.getTime();
 	}
 
-	private void iniciaChrome() {
-		driver = new ChromeDriver();
+//	private void iniciaChrome() {
+//		driver = new ChromeDriver();
+//	}
+	
+	public void iniciaChrome(){
+		System.setProperty("webdriver.chrome.driver", "C:/Drivers/chromedriver/chromedriver.exe"); 
+		options.setBinary("C:\\Jenkins\\google\\chrome\\application\\chrome.exe");
+		driver = new ChromeDriver(options);
 	}
 
 	private void iniciaPhantomJs() {
