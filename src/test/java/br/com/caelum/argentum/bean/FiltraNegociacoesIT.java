@@ -41,7 +41,7 @@ public class FiltraNegociacoesIT {
 	public static WebArchive createWar() {
 
 		MavenDependencyResolver resolver = DependencyResolvers.use(
-				MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
+				MavenDependencyResolver.class).useCentralRepo(false).loadMetadataFromPom("pom.xml");
 
 		WebArchive webArchive = ShrinkWrap
 				.create(WebArchive.class, "ROOT.war")
