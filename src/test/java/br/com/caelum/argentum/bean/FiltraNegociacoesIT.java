@@ -33,7 +33,7 @@ import junit.framework.Assert;
 public class FiltraNegociacoesIT {
 
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("ddMMyyyy");
-	private static final String HTTP_LOCALHOST_8888 = "http://localhost:8888";
+	private static final String HTTP_LOCALHOST_8888 = "http://10.117.176.144:8888";
 	private WebDriver driver;
 	
 	protected ChromeOptions options = new ChromeOptions();
