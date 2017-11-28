@@ -41,7 +41,7 @@ public class FiltraNegociacoesIT {
 	public static WebArchive createWar() {
 
 		MavenDependencyResolver resolver = DependencyResolvers.use(
-				MavenDependencyResolver.class).useCentralRepo(false).loadMetadataFromPom("pom.xml");
+				MavenDependencyResolver.class).loadMetadataFromPom("pom.xml");
 
 		WebArchive webArchive = ShrinkWrap
 				.create(WebArchive.class, "ROOT.war")
@@ -61,22 +61,20 @@ public class FiltraNegociacoesIT {
 
 	@Before
 	public void iniciaNavegador() {
-		
-		iniciaChrome();
-		
-//		if (System.getProperty("phantomjs.binary.path") != null) {
-//			
-//			iniciaPhantomJs();
-//			
-//		} else if (System.getProperty("webdriver.chrome.driver") != null) {
-//			
-//			iniciaChrome();
-//			
-//		} else {
-//			
-//			throw new RuntimeException("Nao eh possivel determinar o navegador para execucao dos testes.");
-//			
-//		}
+				
+		if (System.getProperty("phantomjs.binary.path") != null) {
+			
+			iniciaPhantomJs();
+			
+		} else if (System.getProperty("webdriver.chrome.driver") != null) {
+			
+			iniciaChrome();
+			
+		} else {
+			
+			throw new RuntimeException("Nao eh possivel determinar o navegador para execucao dos testes.");
+			
+		}
 	}
 
 	@After
