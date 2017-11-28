@@ -24,6 +24,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import junit.framework.Assert;
@@ -142,9 +143,16 @@ public class FiltraNegociacoesIT {
 	}
 
 	private void iniciaPhantomJs() {
-		DesiredCapabilities dc = new DesiredCapabilities();
-		dc.setJavascriptEnabled(true);
-		driver = new PhantomJSDriver(dc);
+		
+		DesiredCapabilities caps = new DesiredCapabilities();
+		caps.setJavascriptEnabled(true); // enabled by default
+		caps.setCapability(
+		    PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
+		    "C:\\Drivers\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe"
+		);
+		
+		caps.setJavascriptEnabled(true);
+		driver = new PhantomJSDriver(caps);
 	}
 	
 }
